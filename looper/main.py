@@ -7,18 +7,21 @@ from typing import List, Optional
 
 ArgsList = Optional[List[str]]
 
-def run(cmd: str) -> int:
+def run(cmd: str, capture: bool) -> int:
     ui.info_2(cmd)
     cmd = cmd.split()
-    process = subprocess.run(
-        cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    kwargs = {}
+    if capture:
+        kwargs['stdout'] = subprocess.PIPE
+        kwargs['stderr'] = subprocess.PIPE
+    process = subprocess.run(cmd, **kwargs)
     if process.returncode:
         ui.info_1(process.stdout.decode("utf-8"))
         ui.error(process.stderr.decode("utf-8"))
     return process.returncode
 
 
-def loop(cmd: List, max_tries: int, stop_on_first_fail: bool) -> None:
+def loop(cmd: List, max_tries: int, stop_on_first_fail: bool, capture: bool) -> None:
     if not cmd or not cmd[0]:
         ui.error("no command provided")
         sys.exit(1)
@@ -26,7 +29,7 @@ def loop(cmd: List, max_tries: int, stop_on_first_fail: bool) -> None:
     runs = 0
     fails = 0
     while True:
-        if run(cmd):
+        if run(cmd, capture):
             if stop_on_first_fail:
                 return
             fails += 1
@@ -48,5 +51,8 @@ def main(args: ArgsList = None) -> None:
     parser.add_argument(
         "-s", "--stop-on-first-fail", action="store_true",
         help="If set looper will stop on the first fail")
+    parser.add_argument(
+        "-c", "--no-capture", action="store_true",
+        help="Don't capture output")
     args_ns = parser.parse_args(args=args)
-    loop(args_ns.cmd, args_ns.max_tries, args_ns.stop_on_first_fail)
+    loop(args_ns.cmd, args_ns.max_tries, args_ns.stop_on_first_fail, not args_ns.no_capture)
