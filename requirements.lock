@@ -1,0 +1,5 @@
+# Generated with dmenv 0.10.0, python 3.6.7, on Linux
+cli-ui==0.9.1
+colorama==0.4.1
+tabulate==0.8.3
+Unidecode==1.0.23
