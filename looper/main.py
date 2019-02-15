@@ -30,16 +30,19 @@ def loop(cmd: List, max_tries: int, stop_on_first_fail: bool, capture: bool) -> 
     cmd = cmd[0]
     runs = 0
     fails = 0
-    while True:
-        if run(cmd, capture):
-            if stop_on_first_fail:
+    try:
+        while True:
+            if run(cmd, capture):
+                if stop_on_first_fail:
+                    return
+                fails += 1
+            runs += 1
+            if max_tries and runs >= max_tries:
+                ui.info_1(f"command \"{cmd}\" failed {fails} times after {max_tries} tries")
                 return
-            fails += 1
-        runs += 1
-        if max_tries and runs >= max_tries:
-            ui.info_1(f"command \"{cmd}\" failed {fails} times after {max_tries} tries")
-            return
-
+    except KeyboardInterrupt:
+        ui.info_2("Interrupted by user")
+        ui.info_1(f"command \"{cmd}\" failed {fails} times after {max_tries} tries")
 
 
 def main(args: ArgsList = None) -> None:
