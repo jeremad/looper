@@ -25,5 +25,6 @@ setup(
     install_requires=[
         "cli-ui",
     ],
+    extras_require={"dev": ["mypy", "flake8"]},
     entry_points={"console_scripts": ["looper = looper.main:main"]},
 )
