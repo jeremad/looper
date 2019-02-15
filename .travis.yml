@@ -6,9 +6,8 @@ python:
 install:
   - curl --fail -L https://github.com/TankerHQ/dmenv/releases/download/v0.10.0/dmenv-linux -o dmenv
   - chmod u+x dmenv
-  - ./dmenv install
+  - export PATH=${PATH}:${pwd}
+  - dmenv install
 
 script:
-  - ./dmenv run flake8 .
-  - ./dmenv run -- mypy --ignore-missing-imports --strict .
-  - ./dmenv run pytest
+  - ./ci.sh
