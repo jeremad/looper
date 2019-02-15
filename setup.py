@@ -1,8 +1,4 @@
 from setuptools import setup, find_packages
-import sys
-
-if sys.version_info.major < 3:
-    sys.exit("Error: Please upgrade to Python3")
 
 
 def get_long_description() -> str:
@@ -15,6 +11,7 @@ setup(
     version="0.1.0",
     description="Run commands until it fails",
     long_description=get_long_description(),
+    python_requires='>=3.6',
     url="https://github.com/jeremad/looper",
     author="Kontrol SAS",
     packages=find_packages(),
