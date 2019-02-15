@@ -8,7 +8,7 @@ def get_long_description() -> str:
 
 setup(
     name="py-loop",
-    version="0.1.0",
+    version="0.1.1",
     description="Run commands until it fails",
     long_description=get_long_description(),
     python_requires='>=3.6',
