@@ -16,8 +16,10 @@ def run(cmd: str, capture: bool) -> int:
         kwargs['stderr'] = subprocess.PIPE
     process = subprocess.run(cmd, **kwargs)
     if process.returncode:
-        ui.info_1(process.stdout.decode("utf-8"))
-        ui.error(process.stderr.decode("utf-8"))
+        if process.stdout:
+            ui.info_1(process.stdout.decode("utf-8"))
+        if process.stderr:
+            ui.error(process.stderr.decode("utf-8"))
     return process.returncode
 
 
