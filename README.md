@@ -1,3 +1,6 @@
+[![License](https://img.shields.io/github/license/jeremad/looper.svg)](https://opensource.org/licenses/MIT)
+[![Build](https://img.shields.io/travis/jeremad/looper/master.svg)](https://travis-ci.org/jeremad/looper)
+
 # Basic tool to run commands in loop
 
 This tool was intended to help QA guy like me with flaky tests, buy either measuring the "flakyness" of the test, or run it until it fails to debug it.
