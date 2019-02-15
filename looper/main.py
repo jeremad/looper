@@ -1,48 +1,12 @@
 import argparse
-import subprocess
 import sys
 
 import cli_ui as ui
-from typing import List, Optional, Any
+from typing import List, Optional
+
+from looper.looper import Looper
 
 ArgsList = Optional[List[str]]
-
-
-def run(cmd: str, capture: bool, **kwargs: Any) -> int:
-    ui.info_2(cmd)
-    cmd_list = cmd.split()
-    if capture:
-        kwargs['stdout'] = subprocess.PIPE
-        kwargs['stderr'] = subprocess.PIPE
-    process = subprocess.run(cmd_list, **kwargs)
-    if process.returncode:
-        if process.stdout:
-            ui.info_1(process.stdout.decode("utf-8"))
-        if process.stderr:
-            ui.error(process.stderr.decode("utf-8"))
-    return process.returncode
-
-
-def loop(cmd: List[str], max_tries: int, stop_on_first_fail: bool, capture: bool) -> None:
-    if not cmd or not cmd[0]:
-        ui.error("no command provided")
-        sys.exit(1)
-    cmd_str = cmd[0]
-    runs = 0
-    fails = 0
-    try:
-        while True:
-            if run(cmd_str, capture):
-                if stop_on_first_fail:
-                    return
-                fails += 1
-            runs += 1
-            if max_tries and runs >= max_tries:
-                ui.info_1(f"command \"{cmd_str}\" failed {fails} times after {max_tries} tries")
-                return
-    except KeyboardInterrupt:
-        ui.info_2("Interrupted by user")
-        ui.info_1(f"command \"{cmd_str}\" failed {fails} times after {max_tries} tries")
 
 
 def main(args: ArgsList = None) -> None:
@@ -60,4 +24,13 @@ def main(args: ArgsList = None) -> None:
         "-c", "--no-capture", action="store_true",
         help="Don't capture output")
     args_ns = parser.parse_args(args=args)
-    loop(args_ns.cmd, args_ns.max_tries, args_ns.stop_on_first_fail, not args_ns.no_capture)
+    if not args_ns.cmd or not args_ns.cmd[0]:
+        ui.error("no command provided")
+        sys.exit(1)
+    looper = Looper(
+        args_ns.cmd[0],
+        args_ns.max_tries,
+        args_ns.stop_on_first_fail,
+        not args_ns.no_capture,
+        )
+    looper.loop()
