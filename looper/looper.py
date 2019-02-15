@@ -1,20 +1,42 @@
 import subprocess
-import sys
 
 import cli_ui as ui
-from typing import Any
+from typing import Any, List
+
+
+class InvalidCommand(Exception):
+    pass
 
 
 class Looper:
-
     def __init__(self, cmd_str: str, max_tries: int, stop_on_first_fail: bool, capture: bool):
+        if not cmd_str:
+            raise InvalidCommand("no command provided")
         self.cmd_str = cmd_str
-        self.cmd = cmd_str.split()
+        self.cmd = self._split()
         self.max_tries = max_tries
         self.stop_on_first_fail = stop_on_first_fail
         self.capture = capture
         self.runs = 0
         self.fails = 0
+
+    def _split(self) -> List[str]:
+        cmd_list = self.cmd_str.split()
+        res = list()
+        tmp = ""
+        for arg in cmd_list:
+            if arg.startswith("'") and not arg.endswith("'"):
+                tmp = arg.strip("'")
+            elif arg.endswith("'") and not arg.startswith("'"):
+                tmp += " "
+                tmp += arg.strip("'")
+                res.append(tmp)
+                tmp = ""
+            elif tmp:
+                tmp += f" {arg}"
+            else:
+                res.append(arg)
+        return res
 
     def run_cmd(self, **kwargs: Any) -> int:
         ui.info_2(self.cmd_str)
@@ -24,8 +46,7 @@ class Looper:
         try:
             process = subprocess.run(self.cmd, **kwargs)
         except FileNotFoundError:
-            ui.error(f"unkown command provided: {self.cmd[0]}")
-            sys.exit(1)
+            raise InvalidCommand(f"unkown command provided: {self.cmd[0]}")
         self.runs += 1
         if process.returncode:
             self.fails += 1
