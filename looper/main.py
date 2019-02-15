@@ -3,18 +3,18 @@ import subprocess
 import sys
 
 import cli_ui as ui
-from typing import List, Optional
+from typing import List, Optional, Any
 
 ArgsList = Optional[List[str]]
 
-def run(cmd: str, capture: bool) -> int:
+
+def run(cmd: str, capture: bool, **kwargs: Any) -> int:
     ui.info_2(cmd)
-    cmd = cmd.split()
-    kwargs = {}
+    cmd_list = cmd.split()
     if capture:
         kwargs['stdout'] = subprocess.PIPE
         kwargs['stderr'] = subprocess.PIPE
-    process = subprocess.run(cmd, **kwargs)
+    process = subprocess.run(cmd_list, **kwargs)
     if process.returncode:
         if process.stdout:
             ui.info_1(process.stdout.decode("utf-8"))
@@ -23,26 +23,26 @@ def run(cmd: str, capture: bool) -> int:
     return process.returncode
 
 
-def loop(cmd: List, max_tries: int, stop_on_first_fail: bool, capture: bool) -> None:
+def loop(cmd: List[str], max_tries: int, stop_on_first_fail: bool, capture: bool) -> None:
     if not cmd or not cmd[0]:
         ui.error("no command provided")
         sys.exit(1)
-    cmd = cmd[0]
+    cmd_str = cmd[0]
     runs = 0
     fails = 0
     try:
         while True:
-            if run(cmd, capture):
+            if run(cmd_str, capture):
                 if stop_on_first_fail:
                     return
                 fails += 1
             runs += 1
             if max_tries and runs >= max_tries:
-                ui.info_1(f"command \"{cmd}\" failed {fails} times after {max_tries} tries")
+                ui.info_1(f"command \"{cmd_str}\" failed {fails} times after {max_tries} tries")
                 return
     except KeyboardInterrupt:
         ui.info_2("Interrupted by user")
-        ui.info_1(f"command \"{cmd}\" failed {fails} times after {max_tries} tries")
+        ui.info_1(f"command \"{cmd_str}\" failed {fails} times after {max_tries} tries")
 
 
 def main(args: ArgsList = None) -> None:

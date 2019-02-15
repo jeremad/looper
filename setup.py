@@ -4,9 +4,11 @@ import sys
 if sys.version_info.major < 3:
     sys.exit("Error: Please upgrade to Python3")
 
-def get_long_description():
+
+def get_long_description() -> str:
     with open("README.md") as fp:
         return fp.read()
+
 
 setup(
     name="py-loop",
