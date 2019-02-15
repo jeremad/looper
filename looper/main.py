@@ -12,7 +12,7 @@ ArgsList = Optional[List[str]]
 def main(args: ArgsList = None) -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "cmd", nargs=1, type=str,
+        "cmd", nargs='?', type=str, default="",
         help="The command you want to run in a loop, between double quotes")
     parser.add_argument(
         "-m", "--max-tries", type=int, default=100,
@@ -23,7 +23,12 @@ def main(args: ArgsList = None) -> None:
     parser.add_argument(
         "-c", "--no-capture", action="store_true",
         help="Don't capture output")
+    parser.add_argument(
+        "-v", "--version", action="store_true")
     args_ns = parser.parse_args(args=args)
+    if args_ns.version:
+        ui.info_1(Looper.version())
+        return
     if not args_ns.cmd or not args_ns.cmd[0]:
         ui.error("no command provided")
         sys.exit(1)

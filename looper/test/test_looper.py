@@ -1,3 +1,4 @@
+import re
 import pytest
 
 import looper
@@ -76,3 +77,8 @@ def test_stop_after_a_while() -> None:
     )
     cmd_looper.loop()
     assert cmd_looper.fails == 1
+
+def test_version() -> None:
+    pattern = re.compile(r"\d+\.\d+\.\d+")
+    version = looper.Looper.version()
+    assert pattern.match(version)

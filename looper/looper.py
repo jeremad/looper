@@ -1,6 +1,7 @@
 import subprocess
 
 import cli_ui as ui
+import pkg_resources
 from typing import Any, List
 
 
@@ -71,3 +72,7 @@ class Looper:
             ui.info_2("Interrupted by user")
         finally:
             self._print_summary()
+
+    @classmethod
+    def version(cls) -> str:
+        return pkg_resources.require("py-loop")[0].version
