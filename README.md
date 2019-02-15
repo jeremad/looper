@@ -31,4 +31,4 @@ At the end you will have a sumary
 
 ## Installation
 
-`pip install --user git+https://github.com/jeremad/looper.git`
+`pip install --user py-loop`
