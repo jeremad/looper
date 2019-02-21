@@ -33,7 +33,7 @@ def main(args: ArgsList = None) -> None:
         ui.error("no command provided")
         sys.exit(1)
     looper = Looper(
-        args_ns.cmd[0],
+        args_ns.cmd,
         args_ns.max_tries,
         args_ns.stop_on_first_fail,
         not args_ns.no_capture,
