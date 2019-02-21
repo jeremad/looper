@@ -40,6 +40,7 @@ class Looper:
         return res
 
     def run_cmd(self, **kwargs: Any) -> int:
+        ui.info_2(f"run #{self.runs + 1}")
         ui.info_2(self.cmd_str)
         if self.capture:
             kwargs['stdout'] = subprocess.PIPE
