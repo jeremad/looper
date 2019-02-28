@@ -1,4 +1,5 @@
-looper.egg-info
+py_loop.egg-info/
 .venv
 __pycache__
 .mypy_cache
+.coverage
