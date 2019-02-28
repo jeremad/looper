@@ -24,6 +24,7 @@ setup(
     ],
     extras_require={
         "dev": [
+            "codecov",
             "flake8",
             "mypy",
             "pytest",
