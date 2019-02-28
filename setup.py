@@ -27,6 +27,7 @@ setup(
             "flake8",
             "mypy",
             "pytest",
+            "pytest-cov",
         ],
     },
     entry_points={"console_scripts": ["looper = looper.main:main"]},
