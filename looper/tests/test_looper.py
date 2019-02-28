@@ -42,6 +42,17 @@ def test_stop_on_first_fail() -> None:
     assert cmd_looper.fails == 1
 
 
+def test_fail_and_std() -> None:
+    cmd_looper = looper.Looper(
+        cmd_str="ls /plop",
+        max_tries=1,
+        stop_on_first_fail=True,
+        capture=True,
+    )
+    cmd_looper.loop()
+    assert cmd_looper.fails == 1
+
+
 def test_wrong_cmd() -> None:
     cmd_looper = looper.Looper(
         cmd_str="llllll",
@@ -56,16 +67,13 @@ def test_wrong_cmd() -> None:
 
 
 def test_empty_cmd() -> None:
-    cmd_looper = looper.Looper(
-        cmd_str="llllll",
-        max_tries=10,
-        stop_on_first_fail=True,
-        capture=False,
-    )
     with pytest.raises(looper.InvalidCommand):
-        cmd_looper.loop()
-    assert cmd_looper.runs == 0
-    assert cmd_looper.fails == 0
+        looper.Looper(
+            cmd_str="",
+            max_tries=10,
+            stop_on_first_fail=True,
+            capture=False,
+        )
 
 
 def test_stop_after_a_while() -> None:
