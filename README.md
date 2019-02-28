@@ -1,5 +1,6 @@
 [![License](https://img.shields.io/github/license/jeremad/looper.svg)](https://opensource.org/licenses/MIT)
 [![Build](https://img.shields.io/travis/jeremad/looper/master.svg)](https://travis-ci.org/jeremad/looper)
+[![codecov](https://codecov.io/gh/jeremad/looper/branch/master/graph/badge.svg)](https://codecov.io/gh/jeremad/looper)
 
 # Basic tool to run commands in loop
 
