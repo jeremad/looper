@@ -4,4 +4,4 @@ set -e
 
 dmenv run flake8 .
 dmenv run -- mypy --ignore-missing-imports --strict .
-dmenv run pytest
+dmenv run -- pytest --cov=looper
