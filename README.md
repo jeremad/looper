@@ -10,23 +10,17 @@ This tool was intended to help QA guy like me with flaky tests, buy either measu
 
 Let's say your test command is `run test`
 
-
 ### Debug
 
-You want to run a test untils it fails to debug it, and you know it may take a while:
-```
-$ looper --max-tries 0 --stop-on-first-fail "run test"
-```
+You want to run a test until it fails to debug it, and you know it may take a while:
+`$ looper --max-tries 0 --stop-on-first-fail "run test"`
 
 `max-tries` to 0, means that there is no limit to the number of times a test can sucessfully run
 
 ### Measure
 
-You want to approximately the failing rate of a test of out 1000 runs:
-
-```
-$ looper --max-tries 1000 "run test"
-```
+You want to find the failing rate of a test of out 1000 runs:
+`$ looper --max-tries 1000 "run test"`
 
 At the end you will have a sumary
 
