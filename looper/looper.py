@@ -92,6 +92,7 @@ class Looper:
                     if self.duration > self.total_time:
                         break
                 if self.delay:
+                    ui.info_2(f"waiting for {self.delay} seconds")
                     time.sleep(self.delay)
         except KeyboardInterrupt:
             ui.info_2("Interrupted by user")
