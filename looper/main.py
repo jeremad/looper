@@ -25,6 +25,12 @@ def main(args: ArgsList = None) -> None:
         help="Don't capture output")
     parser.add_argument(
         "-v", "--version", action="store_true")
+    parser.add_argument(
+        "-d", "--delay", type=float, default=0,
+        help="Delay between runs")
+    parser.add_argument(
+        "-t", "--total-time", type=float, default=0,
+        help="Total time of the runs in seconds, O means no limit")
     args_ns = parser.parse_args(args=args)
     if args_ns.version:
         ui.info_1(Looper.version())
@@ -33,9 +39,11 @@ def main(args: ArgsList = None) -> None:
         ui.error("no command provided")
         sys.exit(1)
     looper = Looper(
-        args_ns.cmd,
-        args_ns.max_tries,
-        args_ns.stop_on_first_fail,
-        not args_ns.no_capture,
+        cmd_str=args_ns.cmd,
+        max_tries=args_ns.max_tries,
+        stop_on_first_fail=args_ns.stop_on_first_fail,
+        capture=(not args_ns.no_capture),
+        delay=args_ns.delay,
+        total_time=args_ns.total_time,
         )
     looper.loop()
