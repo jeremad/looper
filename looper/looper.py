@@ -76,7 +76,7 @@ class Looper:
     def _print_summary(self) -> None:
         ui.info_1(
             f'command "{self.cmd_str}" failed {self.fails} times after {self.runs} tries'
-            + f" in {self.duration} seconds"
+            + f" in {self.duration:.2f} seconds"
         )
 
     def loop(self) -> None:
@@ -89,11 +89,11 @@ class Looper:
                 if self.max_tries and self.runs >= self.max_tries:
                     break
                 if self.total_time:
-                    ui.info_2(f"time elapsed: {self.duration} seconds")
+                    ui.info_3(f"time elapsed: {self.duration:.2f} seconds")
                     if self.duration > self.total_time:
                         break
                 if self.delay:
-                    ui.info_2(f"waiting for {self.delay} seconds")
+                    ui.info_3(f"waiting for {self.delay:.2f} seconds")
                     time.sleep(self.delay)
         except KeyboardInterrupt:
             ui.info_2("Interrupted by user")
