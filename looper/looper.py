@@ -11,7 +11,16 @@ class InvalidCommand(Exception):
 
 
 class Looper:
-    def __init__(self, *, cmd_str: str, max_tries: int, stop_on_first_fail: bool, capture: bool, delay: float, total_time: float):
+    def __init__(
+        self,
+        *,
+        cmd_str: str,
+        max_tries: int,
+        stop_on_first_fail: bool,
+        capture: bool,
+        delay: float,
+        total_time: float,
+    ):
         if not cmd_str:
             raise InvalidCommand("no command provided")
         self.cmd_str = cmd_str
@@ -48,8 +57,8 @@ class Looper:
         ui.info_2(f"run #{self.runs + 1}")
         ui.info_2(self.cmd_str)
         if self.capture:
-            kwargs['stdout'] = subprocess.PIPE
-            kwargs['stderr'] = subprocess.PIPE
+            kwargs["stdout"] = subprocess.PIPE
+            kwargs["stderr"] = subprocess.PIPE
         try:
             process = subprocess.run(self.cmd, **kwargs)
         except FileNotFoundError:
@@ -65,7 +74,10 @@ class Looper:
         return process.returncode
 
     def _print_summary(self) -> None:
-        ui.info_1(f"command \"{self.cmd_str}\" failed {self.fails} times after {self.runs} tries in {self.duration} seconds")
+        ui.info_1(
+            f'command "{self.cmd_str}" failed {self.fails} times after {self.runs} tries'
+            + f" in {self.duration} seconds"
+        )
 
     def loop(self) -> None:
         self.start = time.time()
