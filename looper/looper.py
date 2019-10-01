@@ -89,6 +89,7 @@ class Looper:
                 if self.max_tries and self.runs >= self.max_tries:
                     break
                 if self.total_time:
+                    ui.info_2(f"time elapsed: {self.duration} seconds")
                     if self.duration > self.total_time:
                         break
                 if self.delay:
