@@ -45,4 +45,6 @@ jobs:
       - name: Mypy
         run: dmenv run -- mypy --ignore-missing-imports --strict .
       - name: Send coverage
-        run: codecov
+        run: dmenv run -- codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
