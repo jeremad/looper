@@ -26,7 +26,6 @@ setup(
     extras_require={
         "dev": [
             "black",
-            "codacy-coverage",
             "codecov",
             "flake8",
             "mypy",
