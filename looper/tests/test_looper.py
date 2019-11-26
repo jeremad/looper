@@ -7,7 +7,7 @@ import looper
 @pytest.mark.parametrize("max_tries", [1, 10, 100])
 def test_max_success(max_tries: int) -> None:
     cmd_looper = looper.Looper(
-        cmd_str="ls",
+        cmd=["ls"],
         max_tries=max_tries,
         stop_on_first_fail=False,
         capture=False,
@@ -22,7 +22,7 @@ def test_max_success(max_tries: int) -> None:
 @pytest.mark.parametrize("max_tries", [1, 10, 100])
 def test_max_fails(max_tries: int) -> None:
     cmd_looper = looper.Looper(
-        cmd_str="ls /plop",
+        cmd=["ls", "/plop"],
         max_tries=max_tries,
         stop_on_first_fail=False,
         capture=False,
@@ -36,7 +36,7 @@ def test_max_fails(max_tries: int) -> None:
 
 def test_stop_on_first_fail() -> None:
     cmd_looper = looper.Looper(
-        cmd_str="ls /plop",
+        cmd=["ls", "/plop"],
         max_tries=10,
         stop_on_first_fail=True,
         capture=False,
@@ -50,7 +50,7 @@ def test_stop_on_first_fail() -> None:
 
 def test_fail_and_std() -> None:
     cmd_looper = looper.Looper(
-        cmd_str="ls /plop",
+        cmd=["ls", "/plop"],
         max_tries=1,
         stop_on_first_fail=True,
         capture=True,
@@ -63,7 +63,7 @@ def test_fail_and_std() -> None:
 
 def test_wrong_cmd() -> None:
     cmd_looper = looper.Looper(
-        cmd_str="llllll",
+        cmd=["llllll"],
         max_tries=10,
         stop_on_first_fail=True,
         capture=False,
@@ -79,7 +79,7 @@ def test_wrong_cmd() -> None:
 def test_empty_cmd() -> None:
     with pytest.raises(looper.InvalidCommand):
         looper.Looper(
-            cmd_str="",
+            cmd=[""],
             max_tries=10,
             stop_on_first_fail=True,
             capture=False,
@@ -90,7 +90,11 @@ def test_empty_cmd() -> None:
 
 def test_stop_after_a_while() -> None:
     cmd_looper = looper.Looper(
-        cmd_str="python -c 'import time; import sys; sys.exit(not int(time.time() % 3))'",
+        cmd=[
+            "python",
+            "-c",
+            "import time; import sys; sys.exit(not int(time.time() % 3))",
+        ],
         max_tries=10000000000,
         stop_on_first_fail=True,
         capture=False,
@@ -105,7 +109,7 @@ def test_total_delay() -> None:
     max_tries = 10
     delay = 0.1
     cmd_looper = looper.Looper(
-        cmd_str="ls",
+        cmd=["ls"],
         max_tries=max_tries,
         stop_on_first_fail=True,
         capture=False,
@@ -125,7 +129,7 @@ def test_total_time() -> None:
     max_tries = 100
     delay = 0.1
     cmd_looper = looper.Looper(
-        cmd_str="ls",
+        cmd=["ls"],
         max_tries=max_tries,
         stop_on_first_fail=True,
         capture=False,

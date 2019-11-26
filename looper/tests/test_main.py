@@ -15,3 +15,4 @@ def test_no_cmd():
 
 def test_cmd():
     assert looper.main.main(["ls", "--max-tries", "1"]) is None
+    assert looper.main.main(["--max-tries", "1", "ls"]) is None

@@ -14,17 +14,17 @@ class Looper:
     def __init__(
         self,
         *,
-        cmd_str: str,
+        cmd: List[str],
         max_tries: int,
         stop_on_first_fail: bool,
         capture: bool,
         delay: float,
         total_time: float,
     ):
-        if not cmd_str:
+        if not cmd or not cmd[0]:
             raise InvalidCommand("no command provided")
-        self.cmd_str = cmd_str
-        self.cmd = self._split()
+        self.cmd = cmd
+        self.cmd_str = " ".join(self.cmd)
         self.max_tries = max_tries
         self.stop_on_first_fail = stop_on_first_fail
         self.capture = capture
@@ -35,24 +35,6 @@ class Looper:
         self.start = 0.0
         self.duration = 0.0
         self.run_durations: List[float] = list()
-
-    def _split(self) -> List[str]:
-        cmd_list = self.cmd_str.split()
-        res = list()
-        tmp = ""
-        for arg in cmd_list:
-            if arg.startswith("'") and not arg.endswith("'"):
-                tmp = arg.strip("'")
-            elif arg.endswith("'") and not arg.startswith("'"):
-                tmp += " "
-                tmp += arg.strip("'")
-                res.append(tmp)
-                tmp = ""
-            elif tmp:
-                tmp += f" {arg}"
-            else:
-                res.append(arg)
-        return res
 
     def run_cmd(self, **kwargs: Any) -> int:
         run_start_time = time.time()
