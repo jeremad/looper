@@ -4,6 +4,7 @@ language: python
 python:
   - "3.6"
   - "3.7"
+  - "3.8"
 
 install:
   - curl --fail -L https://github.com/TankerHQ/dmenv/releases/download/v0.20.0/dmenv-linux -o dmenv
