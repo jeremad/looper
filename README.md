@@ -1,4 +1,3 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c0df6535cb64f03921f3c9bb76c9fba)](https://app.codacy.com/app/jeremad/looper?utm_source=github.com&utm_medium=referral&utm_content=jeremad/looper&utm_campaign=Badge_Grade_Dashboard)
 [![License](https://img.shields.io/github/license/jeremad/looper.svg)](https://opensource.org/licenses/MIT)
 [![Build](https://img.shields.io/travis/jeremad/looper/master.svg)](https://travis-ci.org/jeremad/looper)
 [![codecov](https://codecov.io/gh/jeremad/looper/branch/master/graph/badge.svg)](https://codecov.io/gh/jeremad/looper)
