@@ -12,7 +12,9 @@ ArgsList = Optional[List[str]]
 def main(args: ArgsList = None) -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "cmd", nargs=argparse.REMAINDER, help="The command you want to run in a loop"
+        "cmd",
+        nargs=argparse.REMAINDER,
+        help="The command you want to run in a loop (at the end of the full command line)",
     )
     parser.add_argument(
         "-m",
