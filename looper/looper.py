@@ -34,6 +34,7 @@ class Looper:
         self.total_time = total_time
         self.start = 0.0
         self.duration = 0.0
+        self.run_durations: List[float] = list()
 
     def _split(self) -> List[str]:
         cmd_list = self.cmd_str.split()
@@ -54,6 +55,7 @@ class Looper:
         return res
 
     def run_cmd(self, **kwargs: Any) -> int:
+        run_start_time = time.time()
         ui.info_2(f"run #{self.runs + 1}")
         ui.info_2(self.cmd_str)
         if self.capture:
@@ -70,14 +72,22 @@ class Looper:
                 ui.info_1(process.stdout.decode("utf-8"))
             if process.stderr:
                 ui.error(process.stderr.decode("utf-8"))
-        self.duration = time.time() - self.start
+        end = time.time()
+        self.duration = end - self.start
+        self.run_durations.append(end - run_start_time)
         return process.returncode
 
     def _print_summary(self) -> None:
-        ui.info_1(
-            f'command "{self.cmd_str}" failed {self.fails} times after {self.runs} tries'
-            + f" in {self.duration:.2f} seconds"
+        summary = (
+            f'command "{self.cmd_str}" failed {self.fails} times after {self.runs} '
+            + f"tries in {self.duration:.2f} seconds"
         )
+        if self.run_durations:
+            max_time = max(self.run_durations)
+            min_time = min(self.run_durations)
+            mean_time = sum(self.run_durations) / len(self.run_durations)
+            summary = f"{summary} max: {max_time:.2f}, min: {min_time:.2f}, mean: {mean_time:.2f}"
+        ui.info_1(summary)
 
     def loop(self) -> None:
         self.start = time.time()
