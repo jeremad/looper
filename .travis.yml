@@ -6,7 +6,7 @@ python:
   - "3.7"
 
 install:
-  - curl --fail -L https://github.com/TankerHQ/dmenv/releases/download/v0.16.1/dmenv-linux -o dmenv
+  - curl --fail -L https://github.com/TankerHQ/dmenv/releases/download/v0.20.0/dmenv-linux -o dmenv
   - chmod u+x dmenv
   - export PATH=${PATH}:${pwd}
   - dmenv install
