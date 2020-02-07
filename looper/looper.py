@@ -65,10 +65,18 @@ class Looper:
             + f"tries in {self.duration:.2f} seconds"
         )
         if self.run_durations:
-            max_time = max(self.run_durations)
-            min_time = min(self.run_durations)
+            self.run_durations.sort()
+            max_time = self.run_durations[-1]
+            min_time = self.run_durations[0]
             mean_time = sum(self.run_durations) / len(self.run_durations)
-            summary = f"{summary} max: {max_time:.2f}, min: {min_time:.2f}, mean: {mean_time:.2f}"
+            length = len(self.run_durations)
+            if length == 1:
+                med_time = self.run_durations[0]
+            else:
+                med_time = self.run_durations[length // 2 + 1]
+                if length % 2 == 0:
+                    med_time = (self.run_durations[length // 2] + med_time) / 2
+            summary = f"{summary} max: {max_time:.2f}, min: {min_time:.2f}, mean: {mean_time:.2f}, median: {med_time:.2f}" # noqa: 501
         ui.info_1(summary)
 
     def loop(self) -> None:
