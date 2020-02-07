@@ -124,9 +124,29 @@ def test_total_delay() -> None:
     assert diff < 0.1
 
 
-def test_total_time() -> None:
+def test_total_time_even() -> None:
     total_time = 1
     max_tries = 100
+    delay = 0.1
+    cmd_looper = looper.Looper(
+        cmd=["ls"],
+        max_tries=max_tries,
+        stop_on_first_fail=True,
+        capture=False,
+        delay=delay,
+        total_time=total_time,
+    )
+    cmd_looper.loop()
+    assert cmd_looper.fails == 0
+    assert cmd_looper.runs <= (total_time / delay + 1)
+    diff = cmd_looper.duration - total_time
+    assert diff > 0
+    assert cmd_looper.duration - total_time < 0.1
+
+
+def test_total_time_odd() -> None:
+    total_time = 1
+    max_tries = 101
     delay = 0.1
     cmd_looper = looper.Looper(
         cmd=["ls"],
