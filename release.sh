@@ -2,5 +2,5 @@
 set -x
 set -e
 
-python3 setup.py sdist bdist_wheel
+poetry build
 python3 -m twine upload dist/* --verbose
