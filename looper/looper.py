@@ -76,7 +76,7 @@ class Looper:
                 med_time = self.run_durations[length // 2 + 1]
                 if length % 2 == 0:
                     med_time = (self.run_durations[length // 2] + med_time) / 2
-            summary = f"{summary} max: {max_time:.2f}, min: {min_time:.2f}, mean: {mean_time:.2f}, median: {med_time:.2f}" # noqa: 501
+            summary = f"{summary} max: {max_time:.2f}, min: {min_time:.2f}, mean: {mean_time:.2f}, median: {med_time:.2f}"  # noqa: 501
         ui.info_1(summary)
 
     def loop(self) -> None:
