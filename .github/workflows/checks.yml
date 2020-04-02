@@ -33,7 +33,7 @@ jobs:
       - name: install dependencies
         run: poetry install
       - name: Run tests
-        run: poetry run pytest --cov=looper --cov-report=xml --cov-report=term
+        run: poetry run pytest --cov=py_loop --cov-report=xml --cov-report=term
       - name: Black formatter
         run: poetry run black --check py_loop
       - name: Flake linter
