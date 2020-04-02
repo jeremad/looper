@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "looper"
+name = "py-loop"
 version = "0.4.0"
 description = "Run commands until it fails"
 authors = ["jerem <jeremy.tellaa@tanker.io>"]
@@ -21,4 +21,4 @@ requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry.scripts]
-looper = 'looper.main:main'
+looper = 'py_loop.main:main'

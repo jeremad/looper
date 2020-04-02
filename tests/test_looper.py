@@ -1,7 +1,7 @@
 import re
 import pytest
 
-import looper
+import py_loop as looper
 
 
 @pytest.mark.parametrize("max_tries", [1, 10, 100])

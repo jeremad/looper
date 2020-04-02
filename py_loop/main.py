@@ -4,7 +4,7 @@ import sys
 import cli_ui as ui
 from typing import List, Optional
 
-from looper.looper import Looper
+from py_loop.looper import Looper
 
 ArgsList = Optional[List[str]]
 
