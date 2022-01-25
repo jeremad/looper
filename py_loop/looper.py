@@ -1,9 +1,9 @@
 import subprocess
 import time
+from typing import Any, List
 
 import cli_ui as ui
 import pkg_resources
-from typing import Any, List
 
 
 class InvalidCommand(Exception):

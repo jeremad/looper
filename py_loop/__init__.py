@@ -1,1 +1,1 @@
-from .looper import Looper, InvalidCommand  # noqa
+from .looper import InvalidCommand, Looper  # noqa

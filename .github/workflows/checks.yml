@@ -40,6 +40,8 @@ jobs:
         run: poetry run flake8 .
       - name: Mypy
         run: poetry run mypy
+      - name: isort
+        run: poetry run isort --profile black --check .
       - name: Send coverage
         run: poetry run codecov
         env:

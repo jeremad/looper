@@ -1,8 +1,8 @@
 import argparse
 import sys
+from typing import List, Optional
 
 import cli_ui as ui
-from typing import List, Optional
 
 from py_loop.looper import Looper
 
