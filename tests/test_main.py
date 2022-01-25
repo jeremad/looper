@@ -1,6 +1,6 @@
-import py_loop.main as looper_main
-
 import pytest
+
+import py_loop.main as looper_main
 
 
 def test_version() -> None:
