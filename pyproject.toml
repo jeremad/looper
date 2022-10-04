@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "py-loop"
-version = "0.4.1b2"
+version = "0.4.1"
 description = "Run commands until it fails"
 authors = ["jerem <jeremy.tellaa@tanker.io>"]
 
