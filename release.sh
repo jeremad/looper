@@ -3,4 +3,4 @@ set -x
 set -e
 
 poetry build
-python3 -m twine upload dist/* --verbose
+poetry run twine upload dist/* --verbose
