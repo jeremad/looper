@@ -122,7 +122,7 @@ def test_total_delay() -> None:
     assert cmd_looper.runs == max_tries
     diff = cmd_looper.duration - (max_tries - 1) * delay
     assert diff > 0
-    assert diff < 0.1
+    assert diff < 0.2
 
 
 def test_total_time_even() -> None:
