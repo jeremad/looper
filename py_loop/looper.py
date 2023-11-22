@@ -72,6 +72,8 @@ class Looper:
             length = len(self.run_durations)
             if length == 1:
                 med_time = self.run_durations[0]
+            elif length == 2:
+                med_time = (self.run_durations[0] + self.run_durations[1]) / 2
             else:
                 med_time = self.run_durations[length // 2 + 1]
                 if length % 2 == 0:

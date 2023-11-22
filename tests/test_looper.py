@@ -5,7 +5,7 @@ import pytest
 import py_loop as looper
 
 
-@pytest.mark.parametrize("max_tries", [1, 10, 100])
+@pytest.mark.parametrize("max_tries", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_max_success(max_tries: int) -> None:
     cmd_looper = looper.Looper(
         cmd=["ls"],
@@ -20,7 +20,7 @@ def test_max_success(max_tries: int) -> None:
     assert cmd_looper.fails == 0
 
 
-@pytest.mark.parametrize("max_tries", [1, 10, 100])
+@pytest.mark.parametrize("max_tries", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_max_fails(max_tries: int) -> None:
     cmd_looper = looper.Looper(
         cmd=["ls", "/plop"],
