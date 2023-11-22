@@ -1,9 +1,9 @@
+import importlib.metadata
 import subprocess
 import time
 from typing import Any, List
 
 import cli_ui as ui
-import pkg_resources
 
 
 class InvalidCommand(Exception):
@@ -104,4 +104,4 @@ class Looper:
 
     @classmethod
     def version(cls) -> str:
-        return pkg_resources.require("py-loop")[0].version
+        return importlib.metadata.version("py-loop")
