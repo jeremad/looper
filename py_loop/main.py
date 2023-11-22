@@ -9,7 +9,7 @@ from py_loop.looper import Looper
 ArgsList = Optional[List[str]]
 
 
-def main(args: ArgsList = None) -> None:
+def main(args: ArgsList = None) -> Optional[Looper]:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "cmd",
@@ -46,7 +46,7 @@ def main(args: ArgsList = None) -> None:
     args_ns = parser.parse_args(args=args)
     if args_ns.version:
         ui.info_1(Looper.version())
-        return
+        return None
     if not args_ns.cmd or not args_ns.cmd[0]:
         ui.error("no command provided")
         sys.exit(1)
@@ -59,3 +59,4 @@ def main(args: ArgsList = None) -> None:
         total_time=args_ns.total_time,
     )
     looper.loop()
+    return looper
