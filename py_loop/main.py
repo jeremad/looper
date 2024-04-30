@@ -60,3 +60,7 @@ def main(args: ArgsList = None) -> Optional[Looper]:
     )
     looper.loop()
     return looper
+
+
+def cli_main(args: ArgsList = None) -> None:
+    main(args)
