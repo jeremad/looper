@@ -23,4 +23,4 @@ requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry.scripts]
-looper = 'py_loop.main:main'
+looper = 'py_loop.main:cli_main'
