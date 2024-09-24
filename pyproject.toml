@@ -10,10 +10,10 @@ cli-ui = "^0.17.2"
 
 [tool.poetry.group.dev.dependencies]
 twine = "^5.1.1"
-black = "24.4.2"
+black = "24.8.0"
 codecov = "^2.1.13"
-flake8 = "7.1.0"
-mypy = "1.11.0"
+flake8 = "7.1.1"
+mypy = "1.11.2"
 pytest = "^8.3.1"
 pytest-cov = "^5.0.0"
 isort = "^5.13.2"
